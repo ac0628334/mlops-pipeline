@@ -14,9 +14,6 @@ COPY src/ src/
 # Copy trained model
 COPY models/iris_model.pkl ./iris_model.pkl
 
-
-
-
 # Expose port used by Flask app
 EXPOSE 5000
 
