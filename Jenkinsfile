@@ -4,7 +4,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/ac0628334/mlops-pipeline.git'
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/ac0628334/mlops-pipeline.git']]
+                ])
             }
         }
         
@@ -27,7 +31,7 @@ pipeline {
         
         stage('Docker Build & Push') {
             steps {
-                sh 'docker login -u abhidocker0288 -p T5qaFk6GpeaDGE4xGwpRrU_aN5I'
+                sh 'docker login -u abhidocker0288 -p T5qaFk6GpeaDGE4xGwpRU_aN5I'
                 sh 'docker build -t abhidocker0288/mlops-pipeline:latest .'
                 sh 'docker push abhidocker0288/mlops-pipeline:latest'
             }
