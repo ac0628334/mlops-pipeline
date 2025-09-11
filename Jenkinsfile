@@ -33,10 +33,19 @@ pipeline {
             }
         }
         
+
+
+
+
+
+
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl apply -f k8s/'
+                echo 'Skipping Kubernetes deployment - cluster authentication needed'
+                // Uncomment when K8s cluster is configured:
+                // bat 'kubectl apply -f k8s/'
             }
         }
+        
     }
 }
