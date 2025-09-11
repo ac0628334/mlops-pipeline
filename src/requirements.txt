@@ -7,3 +7,4 @@ prometheus-client
 pytest
 httpx
 flask
+pytest

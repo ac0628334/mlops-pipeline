@@ -10,13 +10,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r src/requirements.txt'
+                sh '''
+                    pip install --user -r src/requirements.txt
+                    pip install --user pytest
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest -q'
+                sh '''
+                    export PATH=$HOME/.local/bin:$PATH
+                    python -m pytest src/tests -v
+                '''
             }
         }
 
@@ -25,7 +31,6 @@ pipeline {
                 sh 'docker login -u abhidocker0288 -p T5qaFk6GpeaDGE4xGwpRrU_aN5I'
                 sh 'docker build -t abhidocker0288/mlops-pipeline:latest .'
                 sh 'docker push abhidocker0288/mlops-pipeline:latest'
-
             }
         }
 
