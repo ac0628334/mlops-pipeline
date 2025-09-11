@@ -16,8 +16,8 @@ spec:
         - name: iris-container
           image: abhidocker0288/mlops-pipeline:latest
           ports:
-            - containerPort: 8000
-            - containerPort: 8001
+            - containerPort: 5000
+            
           resources:
             requests:
               memory: "128Mi"
