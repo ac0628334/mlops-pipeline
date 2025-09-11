@@ -11,9 +11,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy entire source code
 COPY src/ src/
 
-# Copy models directory
-COPY models/ models/
-
 # Expose port used by Flask app
 EXPOSE 5000
 
