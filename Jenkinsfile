@@ -14,17 +14,16 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    pip3 install --user -r src/requirements.txt
+                bat '''
+                    pip install --user -r src/requirements.txt
                 '''
             }
         }
         
         stage('Run Tests') {
             steps {
-                sh '''
-                    export PATH=$HOME/.local/bin:$PATH
-                    python3 -m pytest src/tests -v
+                bat '''
+                    python -m pytest src/tests -v
                 '''
             }
         }
