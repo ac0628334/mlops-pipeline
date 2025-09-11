@@ -6,3 +6,4 @@ joblib
 prometheus-client
 pytest
 httpx
+flask
