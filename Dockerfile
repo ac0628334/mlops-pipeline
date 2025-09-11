@@ -9,8 +9,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy your source code
 COPY src/ src/
 
-# Copy the trained model
-COPY src/irish_module.pkl ./irish_module.pkl
+# Copy the trained model from models folder
+COPY models/irish_module.pkl ./irish_module.pkl
 
 # Expose Flask port
 EXPOSE 5000
