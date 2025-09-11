@@ -26,9 +26,10 @@ pipeline {
         
         stage('Docker Build & Push') {
             steps {
-                bat 'docker login -u abhidocker0288 -p T5qaFk6GpeaDGE4xGwpRrU_aN5I'
+                // TODO: Add secure Docker Hub credentials in Jenkins
+                // For now, skip push to avoid security issues
                 bat 'docker build -t abhidocker0288/mlops-pipeline:latest .'
-                bat 'docker push abhidocker0288/mlops-pipeline:latest'
+                echo 'Skipping Docker push - add credentials in Jenkins first'
             }
         }
         
