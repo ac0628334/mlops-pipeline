@@ -1,10 +1,11 @@
-
 from flask import Flask, request, render_template
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
+import pickle
+import os
 
-# Load dataset
+# Load dataset for feature info
 iris = load_iris()
 X = iris.data
 y = iris.target
@@ -17,9 +18,28 @@ HTML_FEATURE_NAMES = [name.replace(" ", "_").replace("(", "").replace(")", "") f
 FEATURE_RANGES = {html_name: (np.min(X[:, i]), np.max(X[:, i]))
                   for i, html_name in enumerate(HTML_FEATURE_NAMES)}
 
-# Train model
-model = RandomForestClassifier(n_estimators=200, random_state=42)
-model.fit(X, y)
+# Load or train model
+MODEL_PATH = 'models/iris_model.pkl'
+
+def load_model():
+    """Load model from file or train new one if file doesn't exist"""
+    if os.path.exists(MODEL_PATH):
+        print(f"Loading existing model from {MODEL_PATH}")
+        with open(MODEL_PATH, 'rb') as f:
+            return pickle.load(f)
+    else:
+        print(f"Model file not found at {MODEL_PATH}, training new model...")
+        model = RandomForestClassifier(n_estimators=200, random_state=42)
+        model.fit(X, y)
+        # Save the newly trained model
+        os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+        with open(MODEL_PATH, 'wb') as f:
+            pickle.dump(model, f)
+        print(f"New model saved to {MODEL_PATH}")
+        return model
+
+# Load the model
+model = load_model()
 
 # Initialize Flask app
 app = Flask(__name__)
