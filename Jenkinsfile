@@ -12,33 +12,29 @@ pipeline {
             }
         }
         
-        stage('Install Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                bat '''
-                    pip install --user -r src/requirements.txt
-                '''
+                bat 'docker build -t mlops-pipeline:test .'
             }
         }
         
-        stage('Run Tests') {
+        stage('Run Tests in Docker') {
             steps {
-                bat '''
-                    python -m pytest src/tests -v
-                '''
+                bat 'docker run --rm mlops-pipeline:test python -m pytest src/tests -v'
             }
         }
         
         stage('Docker Build & Push') {
             steps {
-                sh 'docker login -u abhidocker0288 -p T5qaFk6GpeaDGE4xGwpRU_aN5I'
-                sh 'docker build -t abhidocker0288/mlops-pipeline:latest .'
-                sh 'docker push abhidocker0288/mlops-pipeline:latest'
+                bat 'docker login -u abhidocker0288 -p T5qaFk6GpeaDGE4xGwpRrU_aN5I'
+                bat 'docker build -t abhidocker0288/mlops-pipeline:latest .'
+                bat 'docker push abhidocker0288/mlops-pipeline:latest'
             }
         }
         
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/'
+                bat 'kubectl apply -f k8s/'
             }
         }
     }
