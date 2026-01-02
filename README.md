@@ -66,6 +66,16 @@ Orchestration	Kubernetes (k8s)
 Testing	PyTest
 Deployment	FastAPI / Flask API (if applicable)
 
+Tools
+Python, scikit-learn, pandas
+Git, GitHub Actions, Jenkins
+Docker, Kubernetes
+PyTest
+
+Skills Demonstrated:
+MLOps, DevOps, CI/CD, Docker, Kubernetes, Python, ML Engineering, System Design
+
+
 This stack reflects real-world practices in professional MLOps pipelines. 
 GitHub
 
@@ -113,8 +123,7 @@ This project showcases strong competence in:
 ✔ Version Control & Reproducibility (Git, DVC)
 ✔ Production-ready System Thinking
 
-Recruiters will recognize this as real industry-standard MLOps implementation, not just isolated ML scripts — illustrating that you understand operational concerns as well as machine learning fundamentals. 
-ProjectPro
+
 
 📞 Contact
 
